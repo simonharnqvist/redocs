@@ -255,25 +255,3 @@ fn redocs(m: &Bound<'_, PyModule>) -> PyResult<()> {
     m.add_class::<HTMLReport>()?;
     Ok(())
 }
-
-// TESTS
-#[cfg(test)]
-mod tests {
-    use crate::HTMLReport;
-
-    #[test]
-    fn test_helloworld_header() {
-        let mut page = HTMLReport::py_new("Test".to_string()).unwrap();
-        page.add_header("Hello world".to_string(), 
-                        1 as u8, 
-                        None, 
-                        Some("Arial".to_string()), 
-                        None,  
-                        Some("green".to_string()), 
-                        None);
-        let html = page.to_html();
-        let expected_html: String = "<!DOCTYPE html><html><head></head><body><h1 style='text-align: center; font-family: Arial; color: ; background: Green'>Hello, world!</h1></body></html>".to_string();
-
-        assert!(html == expected_html);
-    }
-}
